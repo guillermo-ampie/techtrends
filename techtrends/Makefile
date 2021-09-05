@@ -26,3 +26,6 @@ test-endpoints:
 	@echo
 	curl localhost:${APP_PORT}/metrics
 
+clean:
+	-rm ./database.db
+
