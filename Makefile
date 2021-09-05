@@ -8,8 +8,11 @@
 lint:
 	vagrant validate
 	
-run:
-	vagrant up	
+start:
+	vagrant up
+
+sync-files:
+	vagrant rsync-auto
 
 ssh:
 	vagrant ssh
