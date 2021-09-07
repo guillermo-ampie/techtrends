@@ -13,6 +13,8 @@ from loguru import logger
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    # Record a new connection request to the Database
+    app.config['DB_CONNECTION_COUNT'] += 1
     return connection
 
 
@@ -30,12 +32,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
 
-# Define the main route of the web application
-@app.route('/')
-def index():
+def fetch_all():
     connection = get_db_connection()
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
+
+    return posts
+
+
+# Define the main route of the web application
+@app.route('/')
+def index():
+    posts = fetch_all()
     logger.info('Endpoint: /')
 
     return render_template('index.html', posts=posts)
@@ -50,7 +58,9 @@ def post(post_id):
         logger.debug('unknown post: [{id}]', id=post_id)
         return render_template('404.html'), 404
     else:
-        logger.debug('post: [{id}]:[{title}]', id=post_id, title=post['title'])
+        logger.debug('post: [{id} :: {title}]',
+                     id=post_id,
+                     title=post['title'])
         return render_template('post.html', post=post)
 
 
@@ -103,10 +113,21 @@ def get_healthz():
 
 @app.route("/metrics")
 def get_metrics():
-    response = {"status": "OK"}
+    error = False
+    message = 'OK'
+    posts = fetch_all()
+    post_count = 'Unknown'
+
+    if posts is None:
+        error = True
+        message = 'ERROR!'
+    else:
+        post_count = len(posts)
+
+    response = {"status": message}
     response["data"] = {
-        "post_count": "FILL_THIS",
-        "db_connection_count": "FILL_THIS"
+        "post_count": post_count,
+        "db_connection_count": app.config['DB_CONNECTION_COUNT']
     }
 
     logger.info('Endpoint: /metrics')
@@ -122,4 +143,5 @@ if __name__ == "__main__":
                format="{time:YYYY-MM-DD HH:mm:ssZZ} | {level} | {message}",
                level="DEBUG")
 
+    app.config['DB_CONNECTION_COUNT'] = 0
     app.run(host='0.0.0.0', port='3111')
