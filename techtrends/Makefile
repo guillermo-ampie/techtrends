@@ -42,7 +42,6 @@ run-docker:
 push-docker: build-docker
 	docker push ${DOCKER_PATH}:${VERSION}
 
-
 test-endpoints-docker:
 	curl localhost:${HOST_PORT}/healthz
 	@echo
