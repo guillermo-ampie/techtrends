@@ -203,3 +203,5 @@ cython_debug/
 
 techtrends/database.db
 notes.txt
+Pipfile
+Pipfile.lock
