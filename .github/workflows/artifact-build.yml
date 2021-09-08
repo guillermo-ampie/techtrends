@@ -1,0 +1,41 @@
+##  Named of the workflow.
+name: Deploy artifact to hub.docker.com
+## Set the trigger policy.
+## In this case, the workflow is execute on a `push` event,
+## or when a new commit is pushed to the repository
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  ## The name of the job
+  deployment:
+    ## Configure the operating system the workflow should run on.
+    runs-on: ubuntu-latest
+    ## Define a sequence of steps to be executed
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to hub.docker.com
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build / Push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./techtrends
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
