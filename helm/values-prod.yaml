@@ -3,7 +3,6 @@ namespace:
 
 service:
   port: 7111
-  nodePort: 30081
 
 image:
   pullPolicy: Always
