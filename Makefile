@@ -18,7 +18,7 @@ setup:
 install:
 	@echo; echo ">>> This should be run inside a virtual env: pipenv shell"
 	@echo; echo "Let pipenv create the 'Pipfile' from the 'requirements.txt' file"; echo
-	pipenv install yapf
+	pipenv install yapf pylint
 	yapf --version
 	pipenv install -r ${DIR}/requirements.txt
 
