@@ -40,6 +40,8 @@ You need to setup the following variables in your GitHub repo to configure your 
 
   * To manually deploy all the Kubernetes resources in the Vagrant Box: [./kubernetes/Makefile](./kubernetes/Makefile)
 
+  * To deploy the application using ArgoCD: [./argocd/Makefile](./argocd/Makefile)
+
 * GitHub Actions configuration file: [techtrends-dockerhub.yml](.github/workflows/techtrends-dockerhub.yml)
 
 * ArgoCD application definition files: [helm-techtrends-prod.yaml](argocd/helm-techtrends-prod.yaml), [helm-techtrends-staging.yaml](argocd/helm-techtrends-prod.yaml)
