@@ -25,8 +25,8 @@ The [TechTrends](./techtrends)  applications is a monolithic app, that is contai
 ### GitHub Actions Variables
 
 You need to setup the following variables in your GitHub repo to configure your GitHub Actions pipeline:
-    * DOCKERHUB_USERNAME: your Docker hub username
-    * [DOCKERHUB_TOKEN](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/): to authenticate into DockerHub
+* DOCKERHUB_USERNAME: your Docker hub username
+* [DOCKERHUB_TOKEN](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/): to authenticate into DockerHub
 
 ## Main Files
 
