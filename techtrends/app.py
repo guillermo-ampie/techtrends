@@ -61,7 +61,7 @@ def index():
     posts = fetch_all()
     logger.info('Endpoint: /')
 
-    if posts is None:   # Error reading from Database
+    if posts is None:  # Error reading from Database
         return render_template('404.html'), 404
 
     return render_template('index.html', posts=posts)
@@ -92,6 +92,8 @@ def about():
 # Define the post creation functionality
 @app.route('/create', methods=('GET', 'POST'))
 def create():
+    logger.debug('Endpoint: /create')
+    writing_error = False
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -99,21 +101,31 @@ def create():
         if not title:
             flash('Title is required!')
         else:
-            connection = get_db_connection()
-            connection.execute(
-                'INSERT INTO posts (title, content) VALUES (?, ?)',
-                (title, content))
-            connection.commit()
-            connection.close()
+            try:
+                connection = get_db_connection()
+                connection.execute(
+                    'INSERT INTO posts (title, content) VALUES (?, ?)',
+                    (title, content))
+                connection.commit()
+            except sqlite3.Error as error:
+                writing_error = True
+                logger.error('Error writing to database: \'{}\'', error)
+            finally:
+                connection.close()
 
             if content is None:
                 content_str = ''
             else:
                 content_str = str(content)[:80]
 
-            logger.debug('post created: [{title}]:[{content}]',
-                         title=title,
-                         content=content_str)
+            if writing_error:
+                logger.error('Error creating post: [{title}]:[{content}]',
+                             title=title,
+                             content=content_str)
+            else:
+                logger.debug('post created: [{title}]:[{content}]',
+                             title=title,
+                             content=content_str)
 
             return redirect(url_for('index'))
 
