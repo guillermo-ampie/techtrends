@@ -134,20 +134,40 @@ def create():
 
 @app.route("/healthz")
 def get_healthz():
-    #TODO: Make it dynamic
-    response = {'status': 'OK - healthy'}
-
     logger.info('Endpoint: /healtz')
-    return jsonify(response), 200
+    reading_error = False
+    try:
+        connection = get_db_connection()
+        connection.execute('SELECT * FROM POSTS LIMIT 1').fetchone()
+
+    except sqlite3.Error as error:
+        reading_error = True
+        logger.error('Error reading from database: \'{}\'', error)
+
+    finally:
+        connection.close()
+
+    if reading_error:
+        app.config['DB_CONNECTION_COUNT'] = 0  # Reset DB connection count
+        message = 'ERROR - unhealthy'
+        http_code = 500
+    else:
+        message = 'OK - healthy'
+        http_code = 200
+
+    response = {'status': message}
+
+    return jsonify(response), http_code
 
 
 @app.route("/metrics")
 def get_metrics():
     posts = fetch_all()
 
-    if posts is None:  #Error reading from database
+    if posts is None:  # Error reading from database
         message = 'ERROR!'
         post_count = 'Unknown'
+        app.config['DB_CONNECTION_COUNT'] = 0  # Reset DB connection count
         connection_count = 'Unknown'
     else:
         message = 'OK'
