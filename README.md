@@ -44,7 +44,7 @@ You need to setup the following variables in your GitHub repo to configure your 
 
 * GitHub Actions configuration file: [techtrends-dockerhub.yml](.github/workflows/techtrends-dockerhub.yml)
 
-* ArgoCD application definition files: [helm-techtrends-prod.yaml](argocd/helm-techtrends-prod.yaml), [helm-techtrends-staging.yaml](argocd/helm-techtrends-prod.yaml)
+* ArgoCD application definition files: [helm-techtrends-prod.yaml](argocd/helm-techtrends-prod.yaml), [helm-techtrends-staging.yaml](argocd/helm-techtrends-staging.yaml)
 
 * Helm Chart and related files: [Chart.yaml](helm/Chart.yaml) and [helm files](helm)
 
