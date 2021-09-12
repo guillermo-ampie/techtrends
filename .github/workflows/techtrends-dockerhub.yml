@@ -14,7 +14,6 @@ jobs:
   deployment:
     ## Configure the operating system the workflow should run on.
     runs-on: ubuntu-latest
-    ## Define a sequence of steps to be executed
     steps:
       -
         name: Checkout
