@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: registry.hub.docker.com/gampie/techtrends
+          images: gampie/techtrends
           tags: |
               type=semver,pattern={{version}}
               type=semver,pattern={{major}}.{{minor}}
