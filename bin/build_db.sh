@@ -2,7 +2,7 @@
 DIR=techtrends
 
 {
-    test -e ${DIR}/database.db &&
+    test -s ${DIR}/database.db &&
         echo ">>> Database already created!"
 } ||
     {
