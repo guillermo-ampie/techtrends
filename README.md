@@ -4,13 +4,13 @@
 
 ## Project Overview
 
-This project showcases the use of several CI/CD tools and Cloud services applied to automate the deployment of a sample Flask application (provided) into a Kubernetes cluster
+This project showcases the use of several CI/CD tools and Cloud services applied to automate the deployment of a sample Flask application (provided) into a Kubernetes cluster.
 
 ### Introduction
 
 This project "operationalize" a sample [Flask](https://flask.palletsprojects.com/) application [TechTrends](./techtrends/app.py) deployed into a [Kubernetes](https://kubernetes.io/)(K8S) cluster built with [K3S](https://k3s.io/).
 
-The [TechTrends](./techtrends)  applications is a monolithic app, that is containerized using [Docker](https://www.docker.com/) and deployed into a Kubernetes cluster; which is installed in a [Vagrant Box](https://www.vagrantup.com/) (this virtual machine uses [OpenSUSE](https://www.opensuse.org/))
+The [TechTrends](./techtrends)  applications is a monolithic app, that is containerized using [Docker](https://www.docker.com/) and deployed into a Kubernetes cluster; which is installed in a [Vagrant Box](https://www.vagrantup.com/) (this virtual machine uses [OpenSUSE](https://www.opensuse.org/)).
 
 #### CI/CD Approach
 
