@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-This project showcases the use of several CI/CD tools and Cloud services used to automate the deployment of a sample Flask application (provided) into a Kubernetes cluster
+This project showcases the use of several CI/CD tools and Cloud services applied to automate the deployment of a sample Flask application (provided) into a Kubernetes cluster
 
 ### Introduction
 
