@@ -50,3 +50,4 @@ jobs:
           # tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
           # By default we also get the "latest" tag
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
