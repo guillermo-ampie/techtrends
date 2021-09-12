@@ -48,4 +48,5 @@ jobs:
           push: true
           platforms: linux/amd64
           # tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
+          # By default we also get the "latest" tag
           tags: ${{ steps.meta.outputs.tags }}
