@@ -17,6 +17,14 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
+      - 
+        name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v3
+        tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -38,4 +46,5 @@ jobs:
           file: ./Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
+          # tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:${{ steps.meta.outputs.tags }}
