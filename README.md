@@ -21,10 +21,10 @@ The [TechTrends](./techtrends)  applications is a monolithic app, that is contai
 2. Then, using [ArgoCD](https://argoproj.github.io/cd) the app is deployed into two namespaces in the Kubernetes cluster:
     * [Helm](https://helm.sh/) is used to write the application configuration templates
 
-
 ### GitHub Actions Variables
 
 You need to setup the following variables in your GitHub repo to configure your GitHub Actions pipeline:
+
 * DOCKERHUB_USERNAME: your Docker hub username
 * [DOCKERHUB_TOKEN](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/): to authenticate into DockerHub
 
