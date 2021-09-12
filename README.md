@@ -10,7 +10,9 @@ This project showcases the use of several CI/CD tools and Cloud services used to
 
 This project "operationalize" a sample [Flask](https://flask.palletsprojects.com/) application [TechTrends](./techtrends/app.py) deployed into a [Kubernetes](https://kubernetes.io/)(K8S) cluster built with [K3S](https://k3s.io/).
 
-Using a CD/CI pipeline all the steps to build and deploy the application in the Kubernetes cluster are fully automated.
+#### CI/CD Approach
+
+Using a CI pipeline and CD tools, all the steps to build and deploy the application in the Kubernetes cluster are fully automated.
 
 The [TechTrends](./techtrends)  applications is a monolithic app, that is containerized using [Docker](https://www.docker.com/) and deployed into a Kubernetes cluster; which is installed in a [Vagrant Box](https://www.vagrantup.com/) (this virtual machine uses [OpenSUSE](https://www.opensuse.org/))
 
