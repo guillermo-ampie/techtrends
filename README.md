@@ -18,7 +18,7 @@ The [TechTrends](./techtrends)  applications is a monolithic app, that is contai
 
 1. A pipeline deployed in [GitHub Actions](https://github.com/features/actions) builds the container image and deploys it to [DockerHub](https://hub.docker.com/)
 
-2. Then, using [ArgoCD]() the app is deployed into two namespaces in the Kubernetes cluster:
+2. Then, using [ArgoCD](https://argoproj.github.io/cd) the app is deployed into two namespaces in the Kubernetes cluster:
     * [Helm](https://helm.sh/) is used to write the application configuration templates
 
 
