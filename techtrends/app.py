@@ -2,7 +2,7 @@ import sqlite3
 
 import sys
 
-from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
+from flask import Flask, jsonify, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
 from loguru import logger
@@ -20,11 +20,19 @@ def get_db_connection():
 
 # Function to get a post using its ID
 def get_post(post_id):
-    connection = get_db_connection()
-    post = connection.execute('SELECT * FROM posts WHERE id = ?',
-                              (post_id, )).fetchone()
-    connection.close()
-    return post
+    my_post = None
+    try:
+        connection = get_db_connection()
+        my_post = connection.execute('SELECT * FROM posts WHERE id = ?',
+                                     (post_id, )).fetchone()
+
+    except sqlite3.Error as error:
+        logger.error('Error reading from database: \'{}\'', error)
+
+    finally:
+        connection.close()
+
+    return my_post
 
 
 # Define the Flask application
@@ -33,9 +41,16 @@ app.config['SECRET_KEY'] = 'your secret key'
 
 
 def fetch_all():
-    connection = get_db_connection()
-    posts = connection.execute('SELECT * FROM posts').fetchall()
-    connection.close()
+    posts = None
+    try:
+        connection = get_db_connection()
+        posts = connection.execute('SELECT * FROM posts').fetchall()
+
+    except sqlite3.Error as error:
+        logger.error('Error reading from database: \'{}\'', error)
+
+    finally:
+        connection.close()
 
     return posts
 
@@ -46,6 +61,9 @@ def index():
     posts = fetch_all()
     logger.info('Endpoint: /')
 
+    if posts is None:   # Error reading from Database
+        return render_template('404.html'), 404
+
     return render_template('index.html', posts=posts)
 
 
@@ -53,15 +71,15 @@ def index():
 # If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
-    post = get_post(post_id)
-    if post is None:
+    my_post = get_post(post_id)
+    if my_post is None:
         logger.debug('unknown post: [{id}]', id=post_id)
         return render_template('404.html'), 404
     else:
         logger.debug('post: [{id} :: {title}]',
                      id=post_id,
-                     title=post['title'])
-        return render_template('post.html', post=post)
+                     title=my_post['title'])
+        return render_template('post.html', post=my_post)
 
 
 # Define the About Us page
@@ -104,7 +122,7 @@ def create():
 
 @app.route("/healthz")
 def get_healthz():
-    # TODO: Make it dynamic
+    #TODO: Make it dynamic
     response = {'status': 'OK - healthy'}
 
     logger.info('Endpoint: /healtz')
@@ -113,21 +131,21 @@ def get_healthz():
 
 @app.route("/metrics")
 def get_metrics():
-    error = False
-    message = 'OK'
     posts = fetch_all()
-    post_count = 'Unknown'
 
-    if posts is None:
-        error = True
+    if posts is None:  #Error reading from database
         message = 'ERROR!'
+        post_count = 'Unknown'
+        connection_count = 'Unknown'
     else:
+        message = 'OK'
         post_count = len(posts)
+        connection_count = app.config['DB_CONNECTION_COUNT']
 
     response = {"status": message}
     response["data"] = {
         "post_count": post_count,
-        "db_connection_count": app.config['DB_CONNECTION_COUNT']
+        "db_connection_count": connection_count
     }
 
     logger.info('Endpoint: /metrics')
