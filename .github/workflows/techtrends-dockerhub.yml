@@ -50,3 +50,4 @@ jobs:
           platforms: linux/amd64
           # tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:latest
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/techtrends:${{ steps.meta.outputs.tags }}
+
