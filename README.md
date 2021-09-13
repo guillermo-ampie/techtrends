@@ -4,17 +4,17 @@
 
 ## Project Overview
 
-This project showcases the use of several CI/CD tools and Cloud services applied to automate the deployment of a sample Flask application (provided) into a Kubernetes cluster.
+This project showcases the use of several CI/CD tools and Cloud services employed to automate the deployment of a sample Flask application (provided) into a Kubernetes cluster.
 
 ### Introduction
 
-This project "operationalize" a sample [Flask](https://flask.palletsprojects.com/) application [TechTrends](./techtrends/app.py) deployed into a [Kubernetes](https://kubernetes.io/)(K8S) cluster built with [K3S](https://k3s.io/).
+This project operationalizes a sample [Flask](https://flask.palletsprojects.com/) application [TechTrends](./techtrends/app.py) deployed into a [Kubernetes](https://kubernetes.io/)(K8S) cluster built with [K3S](https://k3s.io/).
 
-The [TechTrends](./techtrends)  applications is a monolithic app, that is containerized using [Docker](https://www.docker.com/) and deployed into a Kubernetes cluster; which is installed in a [Vagrant Box](https://www.vagrantup.com/) (this virtual machine uses [OpenSUSE](https://www.opensuse.org/)).
+The [TechTrends](./techtrends)  applications is a monolithic app, that is containerized using [Docker](https://www.docker.com/) and deployed into a Kubernetes cluster. The K8S cluster is installed in a [Vagrant Box](https://www.vagrantup.com/) (this virtual machine uses [OpenSUSE](https://www.opensuse.org/)).
 
 #### CI/CD Approach
 
-Using a CI pipeline and CD tools, all the steps to build and deploy the application in the Kubernetes cluster are fully automated.
+All the steps to build and deploy the application into the Kubernetes cluster are fully automated using a CI pipeline and CD tools.
 
 ## CI/CD Tools and Cloud Services
 
@@ -25,18 +25,18 @@ Using a CI pipeline and CD tools, all the steps to build and deploy the applicat
 
 ### GitHub Actions Variables
 
-You need to setup the following variables in your GitHub repo to configure your GitHub Actions pipeline:
+Set up the following variables in the GitHub repo to configure the GitHub Actions pipeline:
 
-* DOCKERHUB_USERNAME: your Docker hub username
+* DOCKERHUB_USERNAME: the Docker Hub username
 * [DOCKERHUB_TOKEN](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/): to authenticate into DockerHub
 
 ## Main Files
 
-* Several Makefiles are provides for your convenience for specific groups of tasks:
+* Several Makefiles are provides as a convenience for specific groups of tasks:
 
   * To manage the Vagrant Box: [./Makefile.vagrant](./Makefile.vagrant)
 
-  * To setup/install the python environment for local: development, test, and Docker management: [./Makefile](Makefile)
+  * To setup/install the python environment for local development, test, and also Docker management: [./Makefile](Makefile)
 
   * To install all the dependencies in the Vagrant Box (OpenSUSE): [./suse_box/Makefile](./suse_box/Makefile)
 
