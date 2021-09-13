@@ -1,6 +1,6 @@
 ## Docker commands used to build the application 
 #
-# Dockerfile in directory "techtrends/techtrends"
+# File: Dockerfile in repository root directory
 #
 # TODO: insert the docker build command
 docker build  --tag gampie/techtrends:latest -f ./Dockerfile ./techtrends
@@ -16,9 +16,61 @@ docker run -d --rm -p 7111:3111 gampie/techtrends:latest
 ## Get the CONTAINER ID
 docker container ls
 ## Get the container's logs
-docker logs --timestamps 7e21b2d3005f
+docker logs 716f41281135
 
 
 ## Logs from the container running the TechTrends application
 # TODO: paste logs from the Docker container 
-# ### FILL_THIS_UP ###
+[amp (main *) techtrends] docker logs  716f41281135
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+2021-09-13 03:51:17+0000 | INFO | Endpoint: /
+2021-09-13 03:51:17.771 | INFO     | __main__:index:62 - Endpoint: /
+2021-09-13 03:51:17+0000 | INFO | Endpoint: /
+172.17.0.1 - - [13/Sep/2021 03:51:17] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [13/Sep/2021 03:51:21] "GET /static/css/main.css HTTP/1.1" 304 -
+172.17.0.1 - - [13/Sep/2021 03:51:22] "GET /favicon.ico HTTP/1.1" 404 -
+2021-09-13 03:51:25.683 | DEBUG    | __main__:post:79 - post: [1 :: 2020 CNCF Annual Report]
+2021-09-13 03:51:25+0000 | DEBUG | post: [1 :: 2020 CNCF Annual Report]
+2021-09-13 03:51:25+0000 | DEBUG | post: [1 :: 2020 CNCF Annual Report]
+172.17.0.1 - - [13/Sep/2021 03:51:25] "GET /1 HTTP/1.1" 200 -
+2021-09-13 03:51:27.018 | INFO     | __main__:index:62 - Endpoint: /
+2021-09-13 03:51:27+0000 | INFO | Endpoint: /
+2021-09-13 03:51:27+0000 | INFO | Endpoint: /
+172.17.0.1 - - [13/Sep/2021 03:51:27] "GET / HTTP/1.1" 200 -
+2021-09-13 03:51:28.268 | DEBUG    | __main__:about:88 - Endpoint: /about
+2021-09-13 03:51:28+0000 | DEBUG | Endpoint: /about
+2021-09-13 03:51:28+0000 | DEBUG | Endpoint: /about
+172.17.0.1 - - [13/Sep/2021 03:51:28] "GET /about HTTP/1.1" 200 -
+2021-09-13 03:51:32+0000 | DEBUG | post: [3 :: Kubernetes v1.20 Release Notes]
+2021-09-13 03:51:32.387 | DEBUG    | __main__:post:79 - post: [3 :: Kubernetes v1.20 Release Notes]
+2021-09-13 03:51:32+0000 | DEBUG | post: [3 :: Kubernetes v1.20 Release Notes]
+172.17.0.1 - - [13/Sep/2021 03:51:32] "GET /3 HTTP/1.1" 200 -
+2021-09-13 03:51:34.857 | DEBUG    | __main__:create:95 - Endpoint: /create
+2021-09-13 03:51:34+0000 | DEBUG | Endpoint: /create
+2021-09-13 03:51:34+0000 | DEBUG | Endpoint: /create
+172.17.0.1 - - [13/Sep/2021 03:51:34] "GET /create HTTP/1.1" 200 -
+2021-09-13 03:51:45+0000 | DEBUG | Endpoint: /create
+2021-09-13 03:51:45.074 | DEBUG    | __main__:create:95 - Endpoint: /create
+2021-09-13 03:51:45+0000 | DEBUG | Endpoint: /create
+2021-09-13 03:51:45.083 | DEBUG    | __main__:create:126 - post created: [This is new, for sure]:[Just a new post!]
+2021-09-13 03:51:45+0000 | DEBUG | post created: [This is new, for sure]:[Just a new post!]
+2021-09-13 03:51:45+0000 | DEBUG | post created: [This is new, for sure]:[Just a new post!]
+172.17.0.1 - - [13/Sep/2021 03:51:45] "POST /create HTTP/1.1" 302 -
+2021-09-13 03:51:45.091 | INFO     | __main__:index:62 - Endpoint: /
+2021-09-13 03:51:45+0000 | INFO | Endpoint: /
+2021-09-13 03:51:45+0000 | INFO | Endpoint: /
+172.17.0.1 - - [13/Sep/2021 03:51:45] "GET / HTTP/1.1" 200 -
+2021-09-13 03:51:50.049 | DEBUG    | __main__:post:79 - post: [7 :: This is new, for sure]
+2021-09-13 03:51:50+0000 | DEBUG | post: [7 :: This is new, for sure]
+2021-09-13 03:51:50+0000 | DEBUG | post: [7 :: This is new, for sure]
+172.17.0.1 - - [13/Sep/2021 03:51:50] "GET /7 HTTP/1.1" 200 -
+2021-09-13 03:59:36.111 | INFO     | __main__:get_metrics:183 - Endpoint: /metrics
+2021-09-13 03:59:36+0000 | INFO | Endpoint: /metrics
+2021-09-13 03:59:36+0000 | INFO | Endpoint: /metrics
+172.17.0.1 - - [13/Sep/2021 03:59:36] "GET /metrics HTTP/1.1" 200 -
+[amp (main *) techtrends]
